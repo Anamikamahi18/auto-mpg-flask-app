@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fuel Efficiency Predictor</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            width: 500px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Fuel Efficiency Prediction</h1>
+
+        <form action="/predict" method="POST">
+
+            <label>Cylinders</label>
+            <input type="number" name="cylinders" required>
+
+            <label>Displacement</label>
+            <input type="number" step="any" name="displacement" required>
+
+            <label>Horsepower</label>
+            <input type="number" step="any" name="horsepower" required>
+
+            <label>Weight</label>
+            <input type="number" step="any" name="weight" required>
+
+            <label>Acceleration</label>
+            <input type="number" step="any" name="acceleration" required>
+
+            <label>Model Year</label>
+            <input type="number" name="model_year" min="70" max="82" required>
+
+            <label>Origin</label>
+
+            <select name="origin" required>
+                <option value="">
+                    Select Origin
+                </option>
+
+                <option value="1">
+                    USA
+                </option>
+
+                <option value="2">
+                    Europe
+                </option>
+
+                <option value="3">
+                    Japan
+                </option>
+
+            </select>
+
+            <button type="submit">
+                Predict MPG
+            </button>
+
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
